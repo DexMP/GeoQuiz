@@ -1,0 +1,21 @@
+<resources>
+    <!-- App's -->
+    <string name="app_name">GeoQuiz</string>
+
+    <!-- Texts -->
+    <string name="question_electrostal">Электросталь построен вокруг завода</string>
+    <string name="question_noginsk">Ногинск, раньше назывался Богородск</string>
+    <string name="question_moscow">Москва самый старый город в России</string>
+    <string name="question_ekaterinburg">Екатеринбург славится горнолыжкой</string>
+
+    <!-- Buttons -->
+    <string name="true_btn_text">True</string>
+    <string name="false_btn_text">False</string>
+    <string name="next_btn_text">Next</string>
+    <string name="prev_btn_text">Prev</string>
+    <string name="restart_btn_text">Restart</string>
+
+    <!-- Toasts -->
+    <string name="correct_toast">Верно!</string>
+    <string name="incorrect_toast">Неверно :(</string>
+</resources>
