@@ -18,4 +18,5 @@
     <!-- Toasts -->
     <string name="correct_toast">Верно!</string>
     <string name="incorrect_toast">Неверно :(</string>
+    <string name="todo">TODO</string>
 </resources>

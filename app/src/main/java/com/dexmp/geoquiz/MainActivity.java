@@ -3,6 +3,8 @@ package com.dexmp.geoquiz;
 import static com.dexmp.geoquiz.data.Consts.KEY_INDEX;
 import static com.dexmp.geoquiz.data.Consts.MAIN_TAG;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dexmp.geoquiz.data.Question;
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtQuestion, txtResult;
     private LinearLayout questionsFrame;
     private FrameLayout resultFrame;
-    private Question[] mQuestionsBank = new Question[] {
+    private final Question[] mQuestionsBank = new Question[] {
             new Question(R.string.question_ekaterinburg, false),
             new Question(R.string.question_moscow, false),
             new Question(R.string.question_noginsk, true),
@@ -52,47 +55,30 @@ public class MainActivity extends AppCompatActivity {
         int question = mQuestionsBank[mCurrentIndex].getTextResID();
         txtQuestion.setText(question);
 
-        btnTrue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // True btn
-                checkAnswer(true);
-            }
+        btnTrue.setOnClickListener(view -> {
+            // True btn
+            checkAnswer(true);
         });
 
-        btnFalse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // False btn
-                checkAnswer(false);
-            }
+        btnFalse.setOnClickListener(view -> {
+            // False btn
+            checkAnswer(false);
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mCurrentIndex < (mQuestionsBank.length - 1)){
-                    mCurrentIndex = (mCurrentIndex + 1);
-                    updateQuestion();
-                } else {
-                    resultUI();
-                }
-            }
-        });
-
-        /*
-        btnPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mCurrentIndex == 0) {
-                    mCurrentIndex = mQuestionsBank.length - 1;
-                } else {
-                    mCurrentIndex = mCurrentIndex - 1;
-                }
+        btnNext.setOnClickListener(view -> {
+            if (mCurrentIndex < (mQuestionsBank.length - 1)){
+                mCurrentIndex = (mCurrentIndex + 1);
                 updateQuestion();
+            } else {
+                resultUI();
             }
         });
-        */
+
+        btnRestart.setOnClickListener(v -> {
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        });
 
         updateQuestion();
     }
@@ -116,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
+    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         Log.i(MAIN_TAG, "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
@@ -161,10 +147,12 @@ public class MainActivity extends AppCompatActivity {
         btnTrue.setClickable(true);
     }
 
+    @SuppressLint("SetTextI18n")
     private void resultUI() {
         questionsFrame.setVisibility(View.GONE);
         resultFrame.setVisibility(View.VISIBLE);
-        txtResult.setText("Верно на " + countTrueAnswer / mQuestionsBank.length * 100 + "%");
+        int percents = (int) (countTrueAnswer / mQuestionsBank.length * 100);
+        txtResult.setText("Верно на " + percents + "%");
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -172,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         btnFalse.setClickable(false);
         boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
 
-        int messageResId = 0;
+        int messageResId;
 
         if (userPressedTrue == answerIsTrue) {
             messageResId = R.string.correct_toast;
