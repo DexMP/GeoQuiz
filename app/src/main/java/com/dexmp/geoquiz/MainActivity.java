@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnCheats.setOnClickListener(view ->{
+            Intent cheatActivityStart = new Intent(MainActivity.this, CheatActivity.class);
+            startActivity(cheatActivityStart);
         });
 
         updateQuestion();

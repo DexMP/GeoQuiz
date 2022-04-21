@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
         android:textColor="@color/text_color"
+        style="?android:attr/buttonBarButtonStyle"
         android:text="@string/show_answer_btn"/>
 
 </LinearLayout>
