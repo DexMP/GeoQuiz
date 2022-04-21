@@ -22,7 +22,7 @@ import com.dexmp.geoquiz.data.Question;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnTrue, btnFalse, btnRestart;
+    private Button btnTrue, btnFalse, btnRestart, btnCheats;
     private ImageButton btnNext;
     private TextView txtQuestion, txtResult;
     private LinearLayout questionsFrame;
@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        btnCheats.setOnClickListener(view ->{
+        });
+
         updateQuestion();
     }
 
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         btnTrue = findViewById(R.id.btn_true);
         btnFalse = findViewById(R.id.btn_false);
         btnRestart = findViewById(R.id.restart_btn);
+        btnCheats = findViewById(R.id.btn_cheats);
 
         // ImageButtons
         btnNext = findViewById(R.id.btn_next);
