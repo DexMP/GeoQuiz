@@ -1,3 +1,3 @@
 # GeoQuiz
 ____
- Solo 'pet-project'
+ Solo `pet-project`
