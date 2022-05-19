@@ -74,14 +74,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnRestart.setOnClickListener(v -> {
+        btnRestart.setOnClickListener(view -> {
             Intent intent = getIntent();
             finish();
             startActivity(intent);
         });
 
-        btnCheats.setOnClickListener(view ->{
-            Intent cheatActivityStart = new Intent(MainActivity.this, CheatActivity.class);
+        btnCheats.setOnClickListener(view -> {
+            boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
+            Intent cheatActivityStart = CheatActivity.newIntent(MainActivity.this, answerIsTrue);
             startActivity(cheatActivityStart);
         });
 
